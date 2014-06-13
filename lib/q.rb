@@ -35,6 +35,26 @@ module Blockchain
       get('nextretarget').to_i
     end
 
+    def avgtxsize
+      get('avgtxsize').to_i
+    end
+
+    def avgtxvalue
+      get('avgtxvalue').to_i
+    end
+
+    def interval
+      BigDecimal.new(get('interval'))
+    end
+
+    def eta
+      BigDecimal.new(get('eta'))
+    end
+
+    def avgtxnumber
+      get('avgtxnumber').to_i
+    end
+
     def get(path)
       response = open("#{PATH}/#{path}")
       response.read if response.status.first == '200'
