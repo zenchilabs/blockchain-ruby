@@ -2,7 +2,7 @@ module Blockchain
 
   ROOT = 'https://blockchain.info'
 
-  def get(path)
+  def self.get(path)
     response = open("#{ROOT}/#{path}")
     response.read if response.status.first == '200'
   end
@@ -10,7 +10,7 @@ module Blockchain
   module Query
     QUERY = 'q'
 
-    def q(path)
+    def self.q(path)
       get("#{QUERY}/#{path}")
     end
 

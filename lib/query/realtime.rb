@@ -1,55 +1,55 @@
 module Blockchain
   module Query
 
-    def getdifficulty
+    def self.getdifficulty
       BigDecimal.new(q('getdifficulty'))
     end
 
-    def getblockcount
+    def self.getblockcount
       q('getblockcount').to_i
     end
 
-    def latesthash
+    def self.latesthash
       q('latesthash')
     end
 
-    def bcperblock
+    def self.bcperblock
       q('bcperblock').to_i
     end
 
-    def totalbc
+    def self.totalbc
       q('totalbc').to_i
     end
 
-    def probability
+    def self.probability
       BigDecimal.new(q('probability'))
     end
 
-    def hashestowin
+    def self.hashestowin
       q('hashestowin').to_i
     end
 
-    def nextretarget
+    def self.nextretarget
       q('nextretarget').to_i
     end
 
-    def avgtxsize
+    def self.avgtxsize
       q('avgtxsize').to_i
     end
 
-    def avgtxvalue
+    def self.avgtxvalue
       q('avgtxvalue').to_i
     end
 
-    def interval
+    def self.interval
       BigDecimal.new(q('interval'))
     end
 
-    def eta
+    def self.eta
       BigDecimal.new(q('eta'))
     end
 
-    def avgtxnumber
+    def self.avgtxnumber
       q('avgtxnumber').to_i
     end
   end

@@ -23,7 +23,7 @@ module Blockchain
 
       # can only get one
       def firstseen(index = 0, options = {})
-        DateTime.strptime(endpoint('addressfirstseen', options, @addresses[index]))
+        DateTime.strptime(endpoint('addressfirstseen', options, @addresses[index]), '%s')
       end
 
       def endpoint(path, options, addresses = @addresses)
