@@ -46,7 +46,7 @@ describe Blockchain::Address do
   end
 
   def fake(path, body, address = @test)
-    FakeWeb.register_uri(:get, "#{Blockchain::ROOT}/#{Blockchain::Query::URI}/#{path}/#{address}?confirmations=1",
+    FakeWeb.register_uri(:get, "#{Blockchain::ROOT}/#{Blockchain::Q}/#{path}/#{address}?confirmations=1",
                          body: body, status: 200)
   end
 end

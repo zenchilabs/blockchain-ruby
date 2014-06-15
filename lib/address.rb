@@ -41,7 +41,7 @@ module Blockchain
       full = "#{path}/#{address}?confirmations=#{confs}"
       full << "&#{start_time.strftime('%Q')}" unless start_time.nil?
       full << "&#{end_time.strftime('%Q')}" unless end_time.nil?
-      Query.q("#{path}/#{address}?confirmations=#{confs}")
+      Blockchain.q("#{path}/#{address}?confirmations=#{confs}")
     end
   end
 end

@@ -77,7 +77,7 @@ describe Blockchain do
   end
 
   def fake(path, body)
-    FakeWeb.register_uri(:get, "#{Blockchain::ROOT}/#{Blockchain::Query::URI}/#{path}",
+    FakeWeb.register_uri(:get, "#{Blockchain::ROOT}/#{Blockchain::Q}/#{path}",
                          body: body,  status: 200)
   end
 end

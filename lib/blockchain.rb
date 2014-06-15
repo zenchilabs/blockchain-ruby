@@ -1,18 +1,16 @@
 module Blockchain
   ROOT = 'https://blockchain.info'
+  Q = 'q'
 
   def self.get(path)
     response = open("#{ROOT}/#{path}")
     response.read if response.status.first == '200'
   end
 
-  module Query
-    URI = 'q'
-    def self.q(path)
-      Blockchain.get("#{URI}/#{path}")
-    end
-
+  def self.q(path)
+    self.get("#{Q}/#{path}")
   end
+
 end
 
 require 'money'
