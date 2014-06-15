@@ -9,14 +9,6 @@ module Blockchain
       Address.new(addresses.join('|'))
     end
 
-    def to_a
-      @address.split('|')
-    end
-
-    def to_s
-      @address
-    end
-
     # start_time, end_time only work for this endpoint. why? no idea
     def received(options = {})
       Money.new(info('getreceivedbyaddress', options), 'BTC')
@@ -33,6 +25,18 @@ module Blockchain
     # can only get one
     def firstseen(i = 0, options = {})
       DateTime.strptime(info('addressfirstseen', options, self.to_a[i]), '%s')
+    end
+
+    def to_a
+      @address.split('|')
+    end
+
+    def to_s
+      @address
+    end
+
+    def +(other)
+      Address.from_multiple(self.to_a + other.to_a)
     end
 
     private def info(path, options, address = @address)

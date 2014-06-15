@@ -6,8 +6,13 @@ describe Blockchain::Address do
   before :all do
     FakeWeb.allow_net_connect = false
     @test = '1EzwoHtiXB4iFwedPr49iywjZn2nnekhoj'
-    @as = Blockchain::Address.from_multiple("1", "2", "3")
+    @as = Blockchain::Address.from_multiple('1', '2', '3')
     @a = Blockchain::Address.new(@test)
+  end
+
+  it 'should add with other addresses' do
+    c = @a + @as
+    expect(c.to_a).to eq([@test, '1', '2', '3'])
   end
 
   it 'can take multiple addresses' do
