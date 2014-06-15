@@ -1,6 +1,5 @@
 module Blockchain
-
-  ROOT = 'http://blockchain.info'
+  ROOT = 'https://blockchain.info'
 
   def self.get(path)
     response = open("#{ROOT}/#{path}")
@@ -8,17 +7,17 @@ module Blockchain
   end
 
   module Query
-    QUERY = 'q'
-
+    URI = 'q'
     def self.q(path)
-      Blockchain.get("#{QUERY}/#{path}")
+      Blockchain.get("#{URI}/#{path}")
     end
 
   end
 end
 
+require 'money'
 require 'bigdecimal'
 require 'open-uri'
 require 'date'
-require_relative './query/realtime'
-require_relative './query/address'
+require 'realtime'
+require 'address'
