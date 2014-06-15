@@ -19,24 +19,26 @@ describe Blockchain::Address do
     expect(@a.to_s).to eq(@test)
   end
 
-  it 'gets balance' do
+  it 'should get balance' do
     fake('addressbalance', '200000')
     expect(btc_equal(200000, @a.balance)).to be true
   end
 
-  it 'gets received' do
+  it 'should get received' do
     fake('getreceivedbyaddress', '1234.1234')
     expect(btc_equal(1234.1234, @a.received)).to be true
   end
 
-  it 'gets sent' do
+  it 'should get sent' do
     fake('getsentbyaddress', '.000012345')
     expect(btc_equal(0.000012345, @a.sent)).to be true
   end
 
-  it 'gets first seen' do
+  it 'should get first seen' do
     fake('addressfirstseen', '1331482301')
     expect(@a.firstseen).to eq(DateTime.strptime('1331482301', '%s'))
+    fake('addressfirstseen', '1331482301', @as.to_a[1])
+    expect(@as.firstseen(1)).to eq(DateTime.strptime('1331482301', '%s'))
   end
 
   def btc_equal(amt, actual)
@@ -45,7 +47,6 @@ describe Blockchain::Address do
 
   def fake(path, body, address = @test)
     FakeWeb.register_uri(:get, "#{Blockchain::ROOT}/#{Blockchain::Query::URI}/#{path}/#{address}?confirmations=1",
-                         body: body,
-                         status: 200)
+                         body: body, status: 200)
   end
 end

@@ -1,53 +1,53 @@
 module Blockchain
   def self.difficulty
-    BigDecimal.new(q('getdifficulty'))
+    BigDecimal.new(Query.q('getdifficulty'))
   end
 
-  def self.blockcount
-    q('getblockcount').to_i
+  def self.block_count
+    Query.q('getblockcount').to_i
   end
 
-  def self.latesthash
-    q('latesthash')
+  def self.latest_hash
+    Query.q('latesthash')
   end
 
-  def self.bcperblock
-    q('bcperblock').to_i
+  def self.bc_per_block
+    Query.q('bcperblock').to_i
   end
 
-  def self.totalbc
-    q('totalbc').to_i
+  def self.total
+    Query.q('totalbc').to_i
   end
 
   def self.probability
-    BigDecimal.new(q('probability'))
+    BigDecimal.new(Query.q('probability'))
   end
 
-  def self.hashestowin
-    q('hashestowin').to_i
+  def self.hashes_to_win
+    Query.q('hashestowin').to_i
   end
 
-  def self.nextretarget
-    q('nextretarget').to_i
+  def self.next_retarget
+    Query.q('nextretarget').to_i
   end
 
-  def self.avgtxsize
-    q('avgtxsize').to_i
+  def self.avg_tx_size
+    Query.q('avgtxsize').to_i
   end
 
-  def self.avgtxvalue
-    q('avgtxvalue').to_i
+  def self.avg_tx_value
+    Query.q('avgtxvalue').to_i
   end
 
   def self.interval
-    BigDecimal.new(q('interval'))
+    BigDecimal.new(Query.q('interval'))
   end
 
   def self.eta
-    BigDecimal.new(q('eta'))
+    BigDecimal.new(Query.q('eta'))
   end
 
-  def self.avgtxnumber
-    q('avgtxnumber').to_i
+  def self.avg_tx_number
+    Query.q('avgtxnumber').to_i
   end
 end
