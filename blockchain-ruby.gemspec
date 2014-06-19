@@ -6,9 +6,9 @@ Gem::Specification.new do |gem|
   gem.name          = "blockchain"
   gem.version       = "0.1.0"
   gem.authors       = ["James Larisch"]
-  gem.email         = ["disruptionbydesign@yahoo.com"]
-  gem.description   = ["Convenient wrapper around public Blockchain.info API."]
-  gem.summary       = ["Convenient wrapper around public Blockchain.info API."]
+  gem.email         = ["root@jameslarisch.com"]
+  gem.description   = "Convenient wrapper around public Blockchain.info API."
+  gem.summary       = "Convenient wrapper around public Blockchain.info API."
   gem.homepage      = "https://github.com/zenchilabs/blockchain-ruby"
 
   gem.files         = `git ls-files`.split($/)
@@ -17,12 +17,11 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
 
-  # Gems that must be intalled for sift to compile and build
   gem.add_development_dependency "rspec", "~> 3.0.0"
   gem.add_development_dependency "fakeweb", "~> 1.3.0"
   gem.add_development_dependency "rake"
 
-  # Gems that must be intalled for sift to work
   gem.add_dependency "money", "~> 6.1.1"
   gem.add_dependency "monetize", "~> 0.3.0"
+  gem.add_dependency "bitcoin-money", "~> 0.5.0"
 end

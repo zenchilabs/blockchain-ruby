@@ -28,12 +28,12 @@ describe Blockchain do
 
   it 'should get bcperblock' do
     fake('bcperblock', @test_i_s)
-    expect(Blockchain.bc_per_block).to eq(@test_i)
+    expect(Blockchain.bc_per_block.btc.to_f).to eq(@test_i.to_f)
   end
 
   it 'should get total' do
     fake('totalbc', @test_i_s)
-    expect(Blockchain.total).to eq(@test_i)
+    expect(Blockchain.total.btc.to_f).to eq(@test_i.to_f)
   end
 
   it 'should get probability' do

@@ -17,5 +17,7 @@ require 'money'
 require 'bigdecimal'
 require 'open-uri'
 require 'date'
+require 'btc'
 require 'realtime'
 require 'address'
+

@@ -12,11 +12,11 @@ module Blockchain
   end
 
   def self.bc_per_block
-    self.q('bcperblock').to_i
+    Btc.new(self.q('bcperblock'))
   end
 
   def self.total
-    self.q('totalbc').to_i
+    Btc.new(self.q('totalbc'))
   end
 
   def self.probability

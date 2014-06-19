@@ -11,15 +11,15 @@ module Blockchain
 
     # start_time, end_time only work for this endpoint. why? no idea
     def received(options = {})
-      Money.new(info('getreceivedbyaddress', options), 'BTC')
+      Btc.new(info('getreceivedbyaddress', options))
     end
 
     def sent(options = {})
-      Money.new(info('getsentbyaddress', options), 'BTC')
+      Btc.new(info('getsentbyaddress', options))
     end
 
     def balance(options = {})
-      Money.new(info('addressbalance', options), 'BTC')
+      Btc.new(info('addressbalance', options))
     end
 
     # can only get one

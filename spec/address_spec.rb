@@ -47,7 +47,7 @@ describe Blockchain::Address do
   end
 
   def btc_equal(amt, actual)
-    Money.new(amt, 'BTC') == actual
+    Btc.new(amt) == actual
   end
 
   def fake(path, body, address = @test)
