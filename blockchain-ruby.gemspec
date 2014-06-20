@@ -23,5 +23,5 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "money", "~> 6.1.1"
   gem.add_dependency "monetize", "~> 0.3.0"
-  gem.add_dependency "bitcoin-money", "~> 0.5.0"
+  gem.add_dependency "bitcoin-money", "~> 0.5.1"
 end
