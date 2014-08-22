@@ -30,11 +30,13 @@ describe Blockchain::Transaction do
     expect(@t.ver).to eq (1)
     expect(@t.vin_sz).to eq(1)
     expect(@t.vout_sz).to eq(2)
-    expect(@t.lock_time).to eq("Unavailable")
+    expect(@t.time).to eq(DateTime.strptime('1408744310', '%s'))
     expect(@t.size).to eq(258)
     expect(@t.relayed_by).to eq("64.179.201.80")
     expect(@t.block_height).to eq(12200)
     expect(@t.tx_index).to eq("12563028")
+    expect(@t.result).to eq(0)
+    expect(@t.double_spend).to be_falsey
   end
 
   describe Blockchain::Transaction::Input do
@@ -57,18 +59,14 @@ describe Blockchain::Transaction do
       @os = @t.out
     end
 
-    it 'should assign first out correctly' do
-      o = @os[0]
-      expect(o.hsh).to eq('29d6a3540acfa0a950bef2bfdc75cd51c24390fd')
-      expect(o.value).to eq(Btc.from_satoshis('98000000'))
-      expect(o.script).to eq('76a914641ad5051edd97029a003fe9efb29359fcee409d88ac')
-    end
-
     it 'should assign second out correctly' do
       o = @os[1]
-      expect(o.hsh).to eq('17b5038a413f5c5ee288caa64cfab35a0c01914e')
-      expect(o.value).to eq(Btc.from_satoshis('2000000'))
-      expect(o.script).to eq('76a914641ad5051edd97029a003fe9efb29359fcee409d88ac')
+      expect(o.n).to eq(1)
+      expect(o.addr).to eq('143y8gQbhmgePi4QJyL6QBi8zk4PSM5KQr')
+      expect(o.tx_index).to eq(62922222)
+      expect(o.spent).to eq(true)
+      expect(o.type).to eq(0)
+      expect(o.script).to eq('76a914217810f57fd7cdf79274c5d5e4a891fadc74887b88ac')
     end
   end
 

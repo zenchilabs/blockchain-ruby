@@ -7,11 +7,12 @@ TEST_TRANSACTION = <<-eos
       "ver":1,
       "vin_sz":1,
       "vout_sz":2,
-      "lock_time":"Unavailable",
+      "time":1408744310,
       "size":258,
       "relayed_by":"64.179.201.80",
       "block_height": 12200,
       "tx_index":"12563028",
+      "result": 0,
       "inputs":[
         {
           "prev_out":{
@@ -25,14 +26,22 @@ TEST_TRANSACTION = <<-eos
       ],
       "out":[
         {
-          "value":"98000000",
-          "hash":"29d6a3540acfa0a950bef2bfdc75cd51c24390fd",
-          "script":"76a914641ad5051edd97029a003fe9efb29359fcee409d88ac"
+          "n": 0,
+          "value": 100000,
+          "addr": "13s5H9qsCDxsbCuZF5mGbg6rMLziQAnrxr",
+          "tx_index": 62922222,
+          "spent": true,
+          "type": 0,
+          "script": "76a9141f689f046aae32021905eeec37baef94dd591ff588ac"
         },
         {
-          "value":"2000000",
-          "hash":"17b5038a413f5c5ee288caa64cfab35a0c01914e",
-          "script":"76a914641ad5051edd97029a003fe9efb29359fcee409d88ac"
+          "n": 1,
+          "value": 1883055,
+          "addr": "143y8gQbhmgePi4QJyL6QBi8zk4PSM5KQr",
+          "tx_index": 62922222,
+          "spent": true,
+          "type": 0,
+          "script": "76a914217810f57fd7cdf79274c5d5e4a891fadc74887b88ac"
         }
       ]
     }

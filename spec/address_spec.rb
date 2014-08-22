@@ -25,6 +25,12 @@ describe Blockchain::Address do
     expect(@a.txs).to eq([Blockchain::Transaction.new(JSON.parse(TEST_TRANSACTION))])
   end
 
+  it 'should refresh to same thing' do
+    a1 = @a.clone
+    @a.refresh!
+    expect(@a).to eq(a1)
+  end
+
   def fake_q(path, body, address = @test)
     FakeWeb.register_uri(:get,
                          "#{Blockchain::ROOT}/q/#{path}/#{address}",

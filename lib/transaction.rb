@@ -1,6 +1,6 @@
 module Blockchain
   class Transaction
-    attr_reader :hsh, :ver, :vin_sz, :vout_sz, :lock_time, :size
+    attr_reader :hsh, :ver, :vin_sz, :vout_sz, :time, :size, :result, :double_spend
     attr_reader :relayed_by, :block_height, :tx_index, :inputs, :out
 
     def self.find(transaction)
@@ -12,6 +12,7 @@ module Blockchain
       t.each_key { |k| instance_variable_set("@#{k}", t[k]) }
       @inputs.map! { |i| Input.new(i) }
       @out.map! { |o| Output.new(o) }
+      @time = DateTime.strptime(@time.to_s, '%s')
     end
 
     def txtotalbtcoutput
@@ -44,12 +45,11 @@ module Blockchain
     end
 
     class Output
-      attr_reader :value, :hsh, :script
+      attr_reader :n, :addr, :tx_index, :spent, :type, :script
 
       def initialize(o)
-        @hsh = o['hash']
-        @value = Btc.from_satoshis(o['value'])
-        @script = o['script']
+        o.each_key { |k| instance_variable_set"@#{k}", o[k] }
+        @value = Btc.from_satoshis(@value)
       end
     end
   end
