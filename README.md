@@ -8,6 +8,7 @@ The following functionality has been implemented:
 Addresses
 ---------
 Search for addresses with hash160 or address
+
 returns `nil` if not found
 ~~~ruby
 a = Blockchain::Address.find('143y8gQbhmgePi4QJyL6QBi8zk4PSM5KQr')
@@ -27,6 +28,7 @@ txs = a.txs
 Transactions
 ------------
 Search for transactions with transaction index or hash
+
 returns `nil` if not found
 ~~~ruby
 t = txs[0]
@@ -68,6 +70,7 @@ o.type # => 0
 Blocks
 ------
 Search for blocks with block index or block hash
+
 returns `nil` if not found
 ~~~ruby
 b = Blockchain::Block.find(458453)
