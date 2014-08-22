@@ -32,15 +32,18 @@ module Blockchain
     end
 
     class Input
-      attr_reader :script
+      attr_reader :script, :addr, :n, :tx_index
 
       def initialize(i)
         @script = i['script']
         @prev_out = i['prev_out']
+        @addr = @prev_out['addr']
+        @n = @prev_out['n']
+        @tx_index = @prev_out['tx_index']
       end
 
       def prev_out
-        Transaction.find(@prev_out['tx_index'])
+        Transaction.find(@tx_index)
       end
     end
 

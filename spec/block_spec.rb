@@ -27,6 +27,7 @@ describe Blockchain do
       expect(b.block_index).to eq(818044)
       expect(b.main_chain).to eq(true)
       expect(b.height).to eq(154595)
+      expect(b.fee).to eq(Btc.from_satoshis(12345678))
       expect(b.received_time).to eq(DateTime.strptime('1322131301', '%s'))
       expect(b.relayed_by).to eq('108.60.208.156')
       expect(b.tx).to eq([Blockchain::Transaction.new(JSON.parse(TEST_TRANSACTION))])

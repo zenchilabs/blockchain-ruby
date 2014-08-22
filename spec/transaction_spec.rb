@@ -44,8 +44,11 @@ describe Blockchain::Transaction do
       @is = @t.inputs
     end
 
-    it 'should assign script correctly' do
+    it 'should assign prev out fields correctly' do
       expect(@is[0].script).to eq('76a914641ad5051edd97029a003fe9efb29359fcee409d88ac')
+      expect(@is[0].addr).to eq('143y8gQbhmgePi4QJyL6QBi8zk4PSM5KQr')
+      expect(@is[0].n).to eq(1)
+      expect(@is[0].tx_index).to eq(12554260)
     end
 
     it 'should return prevout as a transaction' do

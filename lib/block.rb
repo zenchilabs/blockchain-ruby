@@ -1,7 +1,7 @@
 module Blockchain
   class Block
     attr_reader :hsh, :ver, :prev_block, :mrkl_root
-    attr_reader :time, :bits, :nonce, :n_tx, :size
+    attr_reader :time, :bits, :fee, :nonce, :n_tx, :size
     attr_reader :block_index, :main_chain, :height, :received_time
     attr_reader :relayed_by, :tx
 
@@ -16,6 +16,7 @@ module Blockchain
       @time = DateTime.strptime(@time.to_s, '%s')
       @received_time = DateTime.strptime(@received_time.to_s, '%s')
       @tx.map! { |t| Blockchain::Transaction.new(t) }
+      @fee = Btc.from_satoshis(fee)
     end
 
     def previous

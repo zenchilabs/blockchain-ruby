@@ -16,10 +16,12 @@ TEST_TRANSACTION = <<-eos
       "inputs":[
         {
           "prev_out":{
-            "hash":"a3e2bcc9a5f776112497a32b05f4b9e5b2405ed9",
+            "n":1,
+            "addr":"143y8gQbhmgePi4QJyL6QBi8zk4PSM5KQr",
             "value":"100000000",
-            "tx_index":"12554260",
-            "n":"2"
+            "tx_index":12554260,
+            "type":0,
+            "script":"76a914641ad5051edd97029a003fe9efb29359fcee409d88ac"
           },
           "script":"76a914641ad5051edd97029a003fe9efb29359fcee409d88ac"
         }
@@ -56,6 +58,7 @@ TEST_BLOCK = <<-eos
       "time":1322131230,
       "bits":437129626,
       "nonce":2964215930,
+      "fee":12345678,
       "n_tx":22,
       "size":9195,
       "block_index":818044,
