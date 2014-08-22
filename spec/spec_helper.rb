@@ -1,2 +1,3 @@
 require 'fakeweb'
+require 'blockchain'
 

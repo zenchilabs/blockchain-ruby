@@ -1,9 +1,8 @@
 require 'spec_helper'
-require 'blockchain'
 
 describe Blockchain do
 
-  TEST1 = <<-eos
+  TEST_BLOCK = <<-eos
     {
       "hash":"0000000000000bae09a7a393a8acded75aa67e46cb81f7acaa5ad94f9eacd103",
       "ver":1,
@@ -19,7 +18,7 @@ describe Blockchain do
       "height":154595,
       "received_time":1322131301,
       "relayed_by":"108.60.208.156",
-      "tx":"nothing"
+      "tx": {}
     }
   eos
 
@@ -30,11 +29,11 @@ describe Blockchain do
   describe '.find' do
     it 'should return nil if invalid raw block' do
       FakeWeb.allow_net_connect = true
-      expect(Blockchain::Block.find('asf')).to  be_nil
+      expect(Blockchain::Block.find('nonsense')).to be_nil
     end
 
-    it 'it should use #meta_init to init all fields' do
-      fake('someid', TEST1)
+    it 'it should init all fields' do
+      fake('someid', TEST_BLOCK)
       b = Blockchain::Block.find('someid')
       expect(b.hsh).to eq('0000000000000bae09a7a393a8acded75aa67e46cb81f7acaa5ad94f9eacd103')
       expect(b.ver).to eq(1)
@@ -50,11 +49,12 @@ describe Blockchain do
       expect(b.height).to eq(154595)
       expect(b.received_time).to eq(DateTime.strptime('1322131301', '%s'))
       expect(b.relayed_by).to eq('108.60.208.156')
+      expect(b.tx).to eq({})
     end
   end
 
   def fake(id, body)
-    FakeWeb.register_uri(:get, "#{Blockchain::ROOT}/#{Blockchain::Block::RAWBLOCK}/#{id}",
+    FakeWeb.register_uri(:get, "#{Blockchain::ROOT}/rawblock/#{id}",
                          body: body, status: 200)
   end
 

@@ -1,57 +1,51 @@
 require 'spec_helper'
-require 'blockchain'
 
 describe Blockchain::Address do
 
+  TEST_ADDRESS = <<-eos
+    {
+      "hash160":"660d4ef3a743e3e696ad990364e555c271ad504b",
+      "address":"1AJbsFZ64EpEfS5UAjAfcUG8pH8Jn3rn1F",
+      "n_tx":17,
+      "n_unredeemed":2,
+      "total_received":1031350000,
+      "total_sent":931250000,
+      "final_balance":100100000,
+      "txs": {}
+    }
+  eos
   before :all do
     FakeWeb.allow_net_connect = false
-    @test = '1EzwoHtiXB4iFwedPr49iywjZn2nnekhoj'
-    @as = Blockchain::Address.from_multiple('1', '2', '3')
-    @a = Blockchain::Address.new(@test)
-  end
-
-  it 'should add with other addresses' do
-    c = @a + @as
-    expect(c.to_a).to eq([@test, '1', '2', '3'])
-  end
-
-  it 'can take multiple addresses' do
-    expect(@as.to_a).to eq(["1", "2", "3"])
-  end
-
-  it 'can take one address' do
-    expect(@a.to_a).to eq([@test])
-    expect(@a.to_s).to eq(@test)
-  end
-
-  it 'should get balance' do
-    fake('addressbalance', '200000')
-    expect(btc_equal(200000, @a.balance)).to be true
-  end
-
-  it 'should get received' do
-    fake('getreceivedbyaddress', '1234.1234')
-    expect(btc_equal(1234.1234, @a.received)).to be true
-  end
-
-  it 'should get sent' do
-    fake('getsentbyaddress', '.000012345')
-    expect(btc_equal(0.000012345, @a.sent)).to be true
+    @test = '1AJbsFZ64EpEfS5UAjAfcUG8pH8Jn3rn1F'
+    fake_raw(TEST_ADDRESS)
+    @a = Blockchain::Address.find(@test)
   end
 
   it 'should get first seen' do
-    fake('addressfirstseen', '1331482301')
+    fake_q('addressfirstseen', '1331482301')
     expect(@a.firstseen).to eq(DateTime.strptime('1331482301', '%s'))
-    fake('addressfirstseen', '1331482301', @as.to_a[1])
-    expect(@as.firstseen(1)).to eq(DateTime.strptime('1331482301', '%s'))
   end
 
-  def btc_equal(amt, actual)
-    Btc.new(amt) == actual
+  it 'should init all fields' do
+    expect(@a.hash160).to eq('660d4ef3a743e3e696ad990364e555c271ad504b')
+    expect(@a.address).to eq('1AJbsFZ64EpEfS5UAjAfcUG8pH8Jn3rn1F')
+    expect(@a.n_tx).to eq(17)
+    expect(@a.n_unredeemed).to eq(2)
+    expect(@a.total_received).to eq(Btc.from_satoshis(1031350000))
+    expect(@a.total_sent).to eq(Btc.from_satoshis(931250000))
+    expect(@a.final_balance).to eq(Btc.from_satoshis(100100000))
+    expect(@a.txs).to eq({})
   end
 
-  def fake(path, body, address = @test)
-    FakeWeb.register_uri(:get, "#{Blockchain::ROOT}/#{Blockchain::Q}/#{path}/#{address}?confirmations=1",
+  def fake_q(path, body, address = @test)
+    FakeWeb.register_uri(:get,
+                         "#{Blockchain::ROOT}/q/#{path}/#{address}",
+                         body: body, status: 200)
+  end
+
+  def fake_raw(body, address = @test)
+    FakeWeb.register_uri(:get,
+                         "#{Blockchain::ROOT}/rawaddr/#{address}",
                          body: body, status: 200)
   end
 end

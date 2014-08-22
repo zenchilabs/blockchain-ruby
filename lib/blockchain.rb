@@ -1,7 +1,5 @@
 module Blockchain
   ROOT = 'https://blockchain.info'
-  Q = 'q'
-  RAWBLOCK = 'rawblock'
 
   def self.get(path)
     response = open("#{ROOT}/#{path}")
@@ -9,13 +7,20 @@ module Blockchain
   end
 
   def self.q(path)
-    self.get("#{Q}/#{path}")
+    self.get("q/#{path}")
   end
 
-  def self.raw_block(path)
-    JSON.parse(self.get("#{RAWBLOCK}/#{path}"))
+  def self.rawblock(block)
+    JSON.parse(self.get("rawblock/#{block}"))
   end
 
+  def self.rawtx(tx)
+    JSON.parse(self.get("rawtx/#{tx}"))
+  end
+
+  def self.rawaddr(address)
+    JSON.parse(self.get("rawaddr/#{address}"))
+  end
 end
 
 require 'money'
@@ -24,6 +29,7 @@ require 'open-uri'
 require 'date'
 require 'btc'
 require 'realtime'
+require 'transaction'
 require 'address'
 require 'block'
 
