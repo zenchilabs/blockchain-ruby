@@ -15,7 +15,7 @@ module Blockchain
       b.each_key { |k| instance_variable_set("@#{k}", b[k]) }
       @time = DateTime.strptime(@time.to_s, '%s')
       @received_time = DateTime.strptime(@received_time.to_s, '%s')
-      tx # todo
+      @tx.map! { |t| Blockchain::Transaction.new(t) }
     end
 
     def previous

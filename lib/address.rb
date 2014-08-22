@@ -12,7 +12,7 @@ module Blockchain
       @total_received = Btc.from_satoshis(@total_received)
       @total_sent = Btc.from_satoshis(@total_sent)
       @final_balance = Btc.from_satoshis(@final_balance)
-      txs # todo
+      @txs.map! { |t| Blockchain::Transaction.new(t) }
     end
 
     # can only get one

@@ -8,11 +8,26 @@ module Blockchain
     end
 
     def initialize(t)
-      #puts "T! #{t.delete('inputs').map(&:to_s)}"
       @hsh = t.delete('hash')
       t.each_key { |k| instance_variable_set("@#{k}", t[k]) }
       @inputs.map! { |i| Input.new(i) }
       @out.map! { |o| Output.new(o) }
+    end
+
+    def txtotalbtcoutput
+      Btc.from_satoshis(Blockchain.q("txtotalbtcoutput/#{@hsh}"))
+    end
+
+    def txtotalbtcinput
+      Btc.from_satoshis(Blockchain.q("txtotalbtcinput/#{@hsh}"))
+    end
+
+    def txfee
+      Btc.from_satoshis(Blockchain.q("txfee/#{@hsh}"))
+    end
+
+    def ==(o)
+      o.instance_variables == self.instance_variables
     end
 
     class Input

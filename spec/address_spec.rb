@@ -2,18 +2,6 @@ require 'spec_helper'
 
 describe Blockchain::Address do
 
-  TEST_ADDRESS = <<-eos
-    {
-      "hash160":"660d4ef3a743e3e696ad990364e555c271ad504b",
-      "address":"1AJbsFZ64EpEfS5UAjAfcUG8pH8Jn3rn1F",
-      "n_tx":17,
-      "n_unredeemed":2,
-      "total_received":1031350000,
-      "total_sent":931250000,
-      "final_balance":100100000,
-      "txs": {}
-    }
-  eos
   before :all do
     FakeWeb.allow_net_connect = false
     @test = '1AJbsFZ64EpEfS5UAjAfcUG8pH8Jn3rn1F'
@@ -34,7 +22,7 @@ describe Blockchain::Address do
     expect(@a.total_received).to eq(Btc.from_satoshis(1031350000))
     expect(@a.total_sent).to eq(Btc.from_satoshis(931250000))
     expect(@a.final_balance).to eq(Btc.from_satoshis(100100000))
-    expect(@a.txs).to eq({})
+    expect(@a.txs).to eq([Blockchain::Transaction.new(JSON.parse(TEST_TRANSACTION))])
   end
 
   def fake_q(path, body, address = @test)
