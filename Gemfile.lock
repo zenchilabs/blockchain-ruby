@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    blockchain-ruby (0.1.0)
+    blockchain-ruby (1.0.0)
       bitcoin-money (~> 0.5.1)
       monetize (~> 0.3.0)
       money (~> 6.1.1)
