@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |gem|
   gem.name          = "blockchain-ruby"
-  gem.version       = "0.1.0"
+  gem.version       = "1.0.0"
   gem.authors       = ["James Larisch"]
   gem.email         = ["root@jameslarisch.com"]
   gem.description   = "Convenient wrapper around public Blockchain.info API."
